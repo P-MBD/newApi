@@ -1,4 +1,5 @@
 const User = require('app/models/users');
+const validator = require('validator');
 const resolvers = {
     Query: {
         user : () => {
@@ -7,14 +8,20 @@ const resolvers = {
     } ,
     Mutation: {
         register : async (param, args) => {
-               await User.create({
+            const errors = [];
+            if(validator.isEmpty(args.phone)){
+              errors.push({message : 'شماره همراه نمی تواند خالی باشد ' })
+            }
+            console.log(errors);
+            return;
+            await User.create({
                     phone: args.phone,
                     password : args.password,
-                })
-                return{
+            })
+            return{
                     status: 200,
                     message: 'اطلاعات شما در سیستم ذخیره شد.'
-                }
+            }
         }
     }
     
