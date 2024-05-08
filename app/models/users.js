@@ -9,7 +9,7 @@ const User = Schema(
     timestamps: true,
   }
 )
-User.statics.CreateToken = async(id, secretId, exp) => {
-  return await jwt.sign({id} , secretId , {expiresIn: exp});
+User.statics.CreateToken = async(id, SecretId , exp) => {
+  return await jwt.sign({id}, SecretId, { expiresIn :  exp} )
 }
 module.exports = mongoose.model('User', User)
