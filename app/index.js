@@ -18,7 +18,11 @@ module.exports = class Application {
             const code = err.originalError.code || 500 ;
             const message = err.message || 'error';
             return {data, status : code, message}
-
+        }, context: ({req}) => {
+            const token = req.headers['token'];
+            return {
+                token
+            };
         }})
          server.start().then(() => {
             server.applyMiddleware({app})
