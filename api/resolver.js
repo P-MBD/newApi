@@ -1,6 +1,7 @@
 const User = require('app/models/users');
 const validator = require('validator');
 const bcrypt= require('bcryptjs');
+
 const resolvers = {
     Query: {
         user : () => {
@@ -20,6 +21,7 @@ const resolvers = {
                 if(errors.length > 0){
                     throw error;
                 }
+               console.log(await User.CreateToken(user.id, '@ad;hkha;kh', '1h'));
                 return{
                     status: 200, 
                     message: 'ok'
@@ -73,6 +75,8 @@ const resolvers = {
             }
         },
 
-    }
+    },
+   
 }
+
 module.exports = resolvers;
